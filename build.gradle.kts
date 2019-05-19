@@ -30,7 +30,6 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 	// additional
-	implementation("org.springframework.cloud:spring-cloud-gcp-starter-config:1.0.0.M3")
 	implementation("com.graphql-java:graphql-java:8.0")
 	implementation("com.graphql-java:graphiql-spring-boot-starter:4.0.0")
 	implementation("com.graphql-java:graphql-spring-boot-starter:4.0.0")
