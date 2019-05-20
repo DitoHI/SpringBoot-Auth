@@ -13,8 +13,11 @@ class FirebaseUtils {
                 .setEmailVerified(false)
                 .setPassword(user.password)
                 .setDisplayName(user.username)
-                .setPhotoUrl(user.photo)
                 .setDisabled(false)
+
+            if (!user.photo.isNullOrBlank()) {
+                request.setPhotoUrl(user.photo)
+            }
 
             FirebaseAuth.getInstance().createUser(request)
         }
