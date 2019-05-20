@@ -29,7 +29,7 @@ data class User(
     var name: String? = "",
 
     @Column(name = "age")
-    var age: String? = "",
+    var age: Int? = null,
 
     @Column(name = "photo")
     var photo: String? = ""

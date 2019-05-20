@@ -39,6 +39,7 @@ dependencies {
 	implementation("com.graphql-java:graphql-java-servlet:5.0.0")
 	implementation("org.postgresql:postgresql:42.2.5")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.1.5.RELEASE")
+	implementation("com.google.firebase:firebase-admin:6.8.1")
 }
 
 tasks.withType<KotlinCompile> {
