@@ -3,6 +3,7 @@ package com.diaryquran.server.dao
 import com.diaryquran.server.model.User
 import com.diaryquran.server.model.input.RegisterUser
 import com.diaryquran.server.repository.UserRepository
+import com.diaryquran.server.utils.FirebaseUtils
 import org.springframework.stereotype.Component
 
 @Component
@@ -23,7 +24,12 @@ class UserDao(private val userRepository: UserRepository) {
             newUser.name = registerUser.username
         }
 
-        return userRepository.save(newUser)
+        val registeredUser = userRepository.save(newUser)
+
+        // create users in firebase
+        FirebaseUtils.createUser(registeredUser)
+
+        return registeredUser
     }
 
     fun getUserByEmail(email: String) = userRepository.findByEmail(email)
