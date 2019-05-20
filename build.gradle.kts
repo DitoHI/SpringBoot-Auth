@@ -5,6 +5,8 @@ plugins {
 	id("io.spring.dependency-management") version "0.6.0.RELEASE"
 	kotlin("jvm") version "1.3.31"
 	kotlin("plugin.spring") version "1.3.31"
+	id("org.jlleitschuh.gradle.ktlint") version "8.0.0"
+	id("org.jlleitschuh.gradle.ktlint-idea") version "8.0.0"
 }
 
 group = "com.diaryquran"
