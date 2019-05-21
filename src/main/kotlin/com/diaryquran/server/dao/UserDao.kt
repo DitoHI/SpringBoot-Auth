@@ -1,5 +1,6 @@
 package com.diaryquran.server.dao
 
+import com.diaryquran.server.exception.CustomException
 import com.diaryquran.server.model.User
 import com.diaryquran.server.model.input.RegisterUser
 import com.diaryquran.server.repository.UserRepository
@@ -17,6 +18,8 @@ class UserDao(private val userRepository: UserRepository) {
             age = registerUser.age,
             photo = registerUser.photo
         )
+
+        if (registerUser.photo.isNullOrEmpty()) throw CustomException(400, "Photo is empty")
 
         // if name is not inputted,
         // then make name same with username
