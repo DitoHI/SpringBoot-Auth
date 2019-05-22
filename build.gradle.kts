@@ -40,6 +40,9 @@ dependencies {
 	implementation("org.postgresql:postgresql:42.2.5")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.1.5.RELEASE")
 	implementation("com.google.firebase:firebase-admin:6.8.1")
+	implementation("javax.validation:validation-api:2.0.1.Final")
+	implementation("org.hibernate:hibernate-validator:6.0.16.Final")
+	implementation("org.hibernate:hibernate-validator-annotation-processor:6.0.16.Final")
 }
 
 tasks.withType<KotlinCompile> {

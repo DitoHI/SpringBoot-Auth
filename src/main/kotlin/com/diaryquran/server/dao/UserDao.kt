@@ -1,15 +1,22 @@
 package com.diaryquran.server.dao
 
-import com.diaryquran.server.exception.CustomException
 import com.diaryquran.server.model.User
 import com.diaryquran.server.model.input.RegisterUser
 import com.diaryquran.server.repository.UserRepository
+import com.diaryquran.server.utils.CommonUtils
 import com.diaryquran.server.utils.FirebaseUtils
 import org.springframework.stereotype.Component
+import org.springframework.web.bind.annotation.RequestBody
+import javax.validation.ConstraintViolation
+import javax.validation.Valid
 
 @Component
 class UserDao(private val userRepository: UserRepository) {
-    fun createUser(registerUser: RegisterUser): User {
+    fun createUser(@Valid @RequestBody registerUser: RegisterUser): User {
+        // validator
+        val violations: Set<ConstraintViolation<RegisterUser>> =
+            CommonUtils.getValidator().validate(registerUser)
+
         val newUser = User(
             username = registerUser.username,
             email = registerUser.email,
@@ -19,7 +26,7 @@ class UserDao(private val userRepository: UserRepository) {
             photo = registerUser.photo
         )
 
-        if (registerUser.photo.isNullOrEmpty()) throw CustomException(400, "Photo is empty")
+        // if (registerUser.photo.isNullOrEmpty()) throw CustomException(400, "Photo is empty")
 
         // if name is not inputted,
         // then make name same with username
