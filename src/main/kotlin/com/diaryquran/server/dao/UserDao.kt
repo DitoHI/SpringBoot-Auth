@@ -1,10 +1,12 @@
 package com.diaryquran.server.dao
 
+import com.diaryquran.server.exception.CustomException
 import com.diaryquran.server.model.User
 import com.diaryquran.server.model.input.RegisterUser
 import com.diaryquran.server.repository.UserRepository
 import com.diaryquran.server.utils.CommonUtils
 import com.diaryquran.server.utils.FirebaseUtils
+import com.diaryquran.server.utils.ResponseCode
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.RequestBody
 import javax.validation.ConstraintViolation
@@ -16,6 +18,15 @@ class UserDao(private val userRepository: UserRepository) {
         // validator
         val violations: Set<ConstraintViolation<RegisterUser>> =
             CommonUtils.getValidator().validate(registerUser)
+
+        // exception when there is violation
+        if (violations.isNotEmpty()) {
+            val violation = violations.iterator().next()
+            throw CustomException(
+                ResponseCode.badRequest().responseCode,
+                "${violation.propertyPath} ${violation.message}"
+            )
+        }
 
         val newUser = User(
             username = registerUser.username,
@@ -30,9 +41,7 @@ class UserDao(private val userRepository: UserRepository) {
 
         // if name is not inputted,
         // then make name same with username
-        registerUser.name ?: run {
-            newUser.name = registerUser.username
-        }
+        newUser.name = registerUser.name ?: registerUser.username
 
         val registeredUser = userRepository.save(newUser)
 
