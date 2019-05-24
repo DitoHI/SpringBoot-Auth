@@ -5,7 +5,6 @@ import com.diaryquran.server.model.User
 import com.diaryquran.server.model.input.RegisterUser
 import com.diaryquran.server.repository.UserRepository
 import com.diaryquran.server.utils.CommonUtils
-import com.diaryquran.server.utils.FirebaseUtils
 import com.diaryquran.server.utils.ResponseCode
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.RequestBody
@@ -46,7 +45,7 @@ class UserDao(private val userRepository: UserRepository) {
         val registeredUser = userRepository.save(newUser)
 
         // create users in firebase
-        FirebaseUtils.createUser(registeredUser)
+        // FirebaseUtils.createUser(registeredUser)
 
         return registeredUser
     }

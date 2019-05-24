@@ -7,10 +7,11 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.Table
+import javax.persistence.UniqueConstraint
 
 @Entity
 @JsonRootName("users")
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = [(UniqueConstraint(columnNames = ["username", "email"]))])
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
