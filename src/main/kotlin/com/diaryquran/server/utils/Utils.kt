@@ -1,6 +1,7 @@
 package com.diaryquran.server.utils
 
 import com.diaryquran.server.model.User
+import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserRecord
 import javax.validation.Validation
@@ -12,11 +13,18 @@ class CommonUtils {
             val factory = Validation.buildDefaultValidatorFactory()
             return factory.validator
         }
+
+        fun hashPassword() {
+        }
     }
 }
 
 class FirebaseUtils {
     companion object {
+        fun setActionCodeSetting(): ActionCodeSettings {
+            return ActionCodeSettings.builder().build()
+        }
+
         fun createUser(user: User) {
             val request = UserRecord.CreateRequest()
                 .setUid(user.id.toString())
@@ -24,6 +32,7 @@ class FirebaseUtils {
                 .setEmailVerified(false)
                 .setPassword(user.password)
                 .setDisplayName(user.username)
+                .setEmailVerified(false)
                 .setDisabled(false)
 
             if (!user.photo.isNullOrBlank()) {

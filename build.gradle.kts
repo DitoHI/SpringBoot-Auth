@@ -43,6 +43,7 @@ dependencies {
 	implementation("javax.validation:validation-api:2.0.1.Final")
 	implementation("org.hibernate:hibernate-validator:6.0.16.Final")
 	implementation("org.hibernate:hibernate-validator-annotation-processor:6.0.16.Final")
+	implementation("org.springframework.security:spring-security-core:5.1.5.RELEASE")
 }
 
 tasks.withType<KotlinCompile> {

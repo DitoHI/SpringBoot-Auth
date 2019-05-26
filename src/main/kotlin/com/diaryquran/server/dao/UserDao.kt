@@ -5,15 +5,15 @@ import com.diaryquran.server.model.User
 import com.diaryquran.server.model.input.RegisterUser
 import com.diaryquran.server.repository.UserRepository
 import com.diaryquran.server.utils.CommonUtils
+import com.diaryquran.server.utils.FirebaseUtils
 import com.diaryquran.server.utils.ResponseCode
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Component
-import org.springframework.web.bind.annotation.RequestBody
 import javax.validation.ConstraintViolation
-import javax.validation.Valid
 
 @Component
 class UserDao(private val userRepository: UserRepository) {
-    fun createUser(@Valid @RequestBody registerUser: RegisterUser): User {
+    fun createUser(registerUser: RegisterUser): User {
         // validator
         val violations: Set<ConstraintViolation<RegisterUser>> =
             CommonUtils.getValidator().validate(registerUser)
@@ -30,22 +30,26 @@ class UserDao(private val userRepository: UserRepository) {
         val newUser = User(
             username = registerUser.username,
             email = registerUser.email,
-            password = registerUser.password,
             name = registerUser.name,
             age = registerUser.age,
+            password = registerUser.password,
             photo = registerUser.photo
         )
+
+        // hash the password
+        val encoder = BCryptPasswordEncoder(10)
+        val userWithHashPassword = newUser.copy()
+        userWithHashPassword.password = encoder.encode(userWithHashPassword.password)
 
         // if name is not inputted,
         // then make name same with username
         newUser.name = registerUser.name ?: registerUser.username
 
-        val registeredUser = userRepository.save(newUser)
+        val userResult = userRepository.save(userWithHashPassword)
 
         // create users in firebase
-        // FirebaseUtils.createUser(registeredUser)
-
-        return registeredUser
+        FirebaseUtils.createUser(newUser)
+        return userResult
     }
 
     fun getUserByEmail(email: String) = userRepository.findByEmail(email)
