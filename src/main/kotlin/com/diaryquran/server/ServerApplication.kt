@@ -16,6 +16,8 @@ fun main(args: Array<String>) {
 }
 
 fun initializeFirebase() {
+    // this is my firebase credential
+    // you must change it to your own credential
     val serviceAccount =
         FileInputStream("src/main/resources/credentials/diary-quran-firebase-adminsdk-qged3-5b98634269.json")
 
