@@ -36,8 +36,6 @@ class UserDao(private val userRepository: UserRepository) {
             photo = registerUser.photo
         )
 
-        // if (registerUser.photo.isNullOrEmpty()) throw CustomException(400, "Photo is empty")
-
         // if name is not inputted,
         // then make name same with username
         newUser.name = registerUser.name ?: registerUser.username
