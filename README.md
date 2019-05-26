@@ -4,10 +4,10 @@ Starting pack to integrate authentication of firebase and storing user in your *
 
 ## Prerequisites
 
-1. _In case_ you still haven't install __gradle__, you can check out its [doc here](https://gradle.org/install/) to install it first
+1. _In case_ you still haven't installed __gradle__, you can check out its [doc here](https://gradle.org/install/) to install it first
 2. Install the gradle dependencies `./gradlew build`
 3. Start the new project in google cloud to create the firebase credentials and store it in the project
-4. Change the credential in `ServerApplication.kt`
+4. Change the credential location in `ServerApplication.kt`
 5. Start the server
 
 ## Notes

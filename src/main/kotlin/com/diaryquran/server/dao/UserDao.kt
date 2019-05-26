@@ -43,7 +43,7 @@ class UserDao(private val userRepository: UserRepository) {
 
         // if name is not inputted,
         // then make name same with username
-        newUser.name = registerUser.name ?: registerUser.username
+        userWithHashPassword.name = registerUser.name ?: registerUser.username
 
         val userResult = userRepository.save(userWithHashPassword)
 
