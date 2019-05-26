@@ -13,9 +13,6 @@ class CommonUtils {
             val factory = Validation.buildDefaultValidatorFactory()
             return factory.validator
         }
-
-        fun hashPassword() {
-        }
     }
 }
 
